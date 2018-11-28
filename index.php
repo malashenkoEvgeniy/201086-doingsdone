@@ -1,45 +1,56 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-$projects = ['Все', 'Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
+$projects = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
 $tasks = [
     [
         'task' => 'Собеседование в IT компании',
         'date' => '01.06.2018',
-        'project' => $projects[3],
+        'project' => $projects[2],
         'status' => false
     ],
     [
         'task' => 'Выполнить тестовое задание',
         'date' => '25.05.2018',
-        'project' => $projects[3],
+        'project' => $projects[2],
         'status' => false
     ],
     [
         'task' => 'Сделать задание первого раздела',
         'date' => '21.04.2018',
-        'project' => $projects[2],
+        'project' => $projects[1],
         'status' => true
     ],
     [
         'task' => 'Встреча с другом',
         'date' => '22.04.2018',
-        'project' => $projects[1],
+        'project' => $projects[0],
         'status' => false
     ],
     [
         'task' => 'Купить корм для кота',
         'date' => '',
-        'project' => $projects[4],
+        'project' => $projects[3],
         'status' => false
     ],
     [
         'task' => 'Заказать пиццу',
         'date' => '',
-        'project' => $projects[4],
+        'project' => $projects[3],
         'status' => false
     ]
 ];
+
+function getcounttask ($tasklist, $project ) {
+    $count=0;
+    for($i = 0; $i < count($tasklist); $i++) {
+        if($tasklist[$i]['project'] === $project) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -89,7 +100,7 @@ $tasks = [
 
                       <li class="main-navigation__list-item <?= ($key == 0) ? ' main-navigation__list-item--active' : '' ?>">
                         <a class="main-navigation__list-item-link" href="#"><?= $project ?></a>
-                        <span class="main-navigation__list-item-count">0</span>
+                        <span class="main-navigation__list-item-count"><?= getcounttask ($tasks, $project) ?></span>
                       </li>
 
                     <?php endforeach; ?>
