@@ -34,3 +34,20 @@ function include_template($name, $data) {
 
     return $result;
 }
+
+/**
+ * Функция подсчитывает количества часов до даты в параметре
+ * @param {string} строка с датой
+ * @return {string} вывод даты вместе с количеством часов до ее наступления
+ */
+
+function get_timeover($date) {
+    date_default_timezone_set('Europe/Kiev');
+    if (!empty($date)) {
+        $newdate = strtotime($date);
+        $ts = ($newdate - time());
+        return $date.'( осталось '. round($ts/3600, 1).' часа)';
+    } else return '';
+}
+
+echo get_timeover($date);
